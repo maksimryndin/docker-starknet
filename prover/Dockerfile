@@ -41,7 +41,7 @@ RUN sed -i "s/x86_64/$(uname -m)/g" .bazelrc
 RUN bazel build --copt="-DNO_AVX" //...
 
 # x86_64-specific
-FROM stone AS stone-x86_64
+FROM stone AS stone-amd64
 WORKDIR stone-prover
 RUN bazel build //...
 
