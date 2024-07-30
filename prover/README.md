@@ -7,15 +7,24 @@ And it supports multiarch, i.e. you can build it for x86-64 and arm64 at least.
 
 [Repository](https://hub.docker.com/r/maksimryndin/starknet-stone)
 
-Run the prover
+Run the prover (make sure to update memory and trace paths in `private_input.json`):
 
 ```sh
 docker run --rm -it -v $(pwd):/tmp maksimryndin/starknet-stone:latest prover \
+    -logtostderr \
     --out_file=/tmp/proof.json \
     --private_input_file=/tmp/private_input.json \
     --public_input_file=/tmp/public_input.json \
     --prover_config_file=/tmp/cpu_air_prover_config.json \
     --parameter_file=/tmp/cpu_air_params.json
+```
+
+Run the verifier:
+
+```sh
+docker run --rm -it -v $(pwd):/tmp maksimryndin/starknet-stone:latest verifier \
+    -logtostderr \
+    --in_file=/tmp/proof.json
 ```
 
 ## Building image locally
